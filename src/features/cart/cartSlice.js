@@ -38,6 +38,10 @@ const cartSlice = createSlice({
             item.quantity--;
             // Calculate the total price of item after the quantity is updated.
             item.totalPrice = item.quantity * item.unitPrice;
+
+            // When the quantity of an item will be zero we will use the 
+            // 'deleteItem' action in this action itself.
+            if (item.quantity === 0) cartSlice.caseReducers.deleteItem(state, action);
         },
         clearCart(state) {
             state.cart = [];
